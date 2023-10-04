@@ -1,0 +1,20 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/menu_home"
+            android:icon="@drawable/baseline_home_24"
+            android:title="Trang chủ" />
+        <item
+            android:id="@+id/menu_search"
+            android:icon="@drawable/baseline_search_24"
+            android:title="Tìm kiếm" />
+        <item
+            android:id="@+id/menu_profile"
+            android:icon="@drawable/baseline_account_circle_24"
+            android:title="Hồ sơ" />
+        <item
+            android:id="@+id/menu_settings"
+            android:icon="@drawable/baseline_settings_24"
+            android:title="Cài đặt" />
+    </group>
+</menu>
