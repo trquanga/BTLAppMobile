@@ -7,7 +7,7 @@
     android:orientation="horizontal"
     android:weightSum="10"
     android:padding="20dp"
-    tools:context=".FavItemActivity">
+    tools:context=".ItemActivity">
     <ImageView
         android:id="@+id/fav_lv_item_img"
         android:layout_width="0dp"

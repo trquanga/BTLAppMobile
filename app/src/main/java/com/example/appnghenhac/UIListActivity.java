@@ -8,12 +8,12 @@ import android.widget.SimpleAdapter;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class UiFavListActivity extends AppCompatActivity {
+public class UIListActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.ui_fav_list);
+        setContentView(R.layout.ui_list);
 
         ListView fav_lv = (ListView) findViewById(R.id.fav_lv);
 
@@ -32,7 +32,7 @@ public class UiFavListActivity extends AppCompatActivity {
                 new SimpleAdapter(
                         this,
                         list_item,
-                        R.layout.favlist_itemview,
+                        R.layout.list_itemview,
                         from,
                         to);
         fav_lv.setAdapter(simpleAdapter);

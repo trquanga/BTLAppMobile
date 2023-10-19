@@ -13,13 +13,16 @@
         android:theme="@style/Theme.AppNgheNhac"
         tools:targetApi="31">
         <activity
+            android:name=".HorizonListItemActivity"
+            android:exported="false" />
+        <activity
             android:name=".ItemUIView"
             android:exported="false" />
         <activity
-            android:name=".FavItemActivity"
+            android:name=".ItemActivity"
             android:exported="false" />
         <activity
-            android:name=".UiFavListActivity"
+            android:name=".UIListActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
