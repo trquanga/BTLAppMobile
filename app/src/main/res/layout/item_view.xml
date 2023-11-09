@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="20dp"
+    tools:context=".ItemActivity"
+    android:id="@+id/music_item"
+    android:gravity="left">
+    <ImageView
+        android:src="@drawable/music"
+        android:id="@+id/album_image"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        ></ImageView>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:orientation="vertical"
+        android:weightSum="2"
+        android:layout_gravity="center">
+        <TextView
+            android:id="@+id/music_file_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tên bài hát"
+            ></TextView>
+
+    </LinearLayout>
+  </LinearLayout>
