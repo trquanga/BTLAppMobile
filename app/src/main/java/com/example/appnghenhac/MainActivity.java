@@ -18,6 +18,7 @@ import com.google.android.material.tabs.TabLayout;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.media.MediaMetadataRetriever;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -30,11 +31,19 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
     public static final int REQUEST_CODE = 1;
     static ArrayList<FileBaiHat> listBaiHat;
+    static ArrayList<Category> categories;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         permission();
+        categories = new ArrayList<>();
+        categories.add(new Category(1, "Rock", R.drawable.rock));
+        categories.add(new Category(2, "Rap", R.drawable.rap));
+        categories.add(new Category(3, "Blue", R.drawable.blue));
+        categories.add(new Category(4, "Jazz", R.drawable.jazz));
+        categories.add(new Category(5, "Pop", R.drawable.pop));
 
     }
 
@@ -69,9 +78,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initViewPager() {
-        ViewPager viewPager = findViewById(R.id.viewpager);
         TabLayout tabLayout = findViewById(R.id.tab_layout);
+        ViewPager viewPager = findViewById(R.id.viewpager);
         ViewPageAdapter viewPageAdapter = new ViewPageAdapter(getSupportFragmentManager());
+        viewPageAdapter.addFragments(new TrangChu(), "Trang chủ");
         viewPageAdapter.addFragments(new DanhSachBaiHat(), "Bài hát");
         viewPageAdapter.addFragments(new DanhSachAlbum(), "Album");
         viewPager.setAdapter(viewPageAdapter);
@@ -117,7 +127,8 @@ public class MainActivity extends AppCompatActivity {
                 MediaStore.Audio.Media.TITLE,
                 MediaStore.Audio.Media.DURATION,
                 MediaStore.Audio.Media.DATA,  //PATH
-                MediaStore.Audio.Media.ARTIST
+                MediaStore.Audio.Media.ALBUM_ID,
+                //MediaStore.Audio.Media.GENRE
         };
         Cursor cursor = context.getContentResolver().query(
                 uri,
@@ -134,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
                 String artist = cursor.getString(4);
 
                 FileBaiHat fileBaiHat = new FileBaiHat(path, title, artist, album, duration);
-                Log.e("Path: " + path, "Album: " + album);
+                Log.e("Path: " + path, "Duration: " + duration);
                 tempListBaiHat.add(fileBaiHat);
             }
             cursor.close();

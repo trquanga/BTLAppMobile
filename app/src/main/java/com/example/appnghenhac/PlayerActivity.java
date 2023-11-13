@@ -2,15 +2,22 @@ package com.example.appnghenhac;
 
 import static com.example.appnghenhac.MainActivity.listBaiHat;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.Intent;
+import android.media.MediaMetadataRetriever;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
@@ -23,6 +30,7 @@ public class PlayerActivity extends AppCompatActivity {
     static Uri uri;
     static MediaPlayer mediaPlayer;
     private Handler handler = new Handler();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,6 +87,7 @@ public class PlayerActivity extends AppCompatActivity {
     private void getIntentMethod() {
         position = getIntent().getIntExtra("position", -1);
         listSongs = listBaiHat;
+
         if(listSongs != null) {
             play_btn.setImageResource(R.drawable.pause);
             uri = Uri.parse(listSongs.get(position).getPath());
@@ -94,6 +103,8 @@ public class PlayerActivity extends AppCompatActivity {
         }
 
         seek_bar.setMax(mediaPlayer.getDuration() / 1000);
+        metaData(uri);
+
     }
 
     private void initView() {
@@ -102,6 +113,14 @@ public class PlayerActivity extends AppCompatActivity {
         duration_played = findViewById(R.id.duration_played);
         duration_total = findViewById(R.id.duration_total);
         back_btn = findViewById(R.id.back_btn);
+        back_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Context context = getBaseContext();
+                Intent intent = new Intent(context, MainActivity.class);
+                startActivity(intent);
+            }
+        });
         menu_btn = findViewById(R.id.menu_btn);
         cover_art = findViewById(R.id.cover_art);
         shuffle_btn = findViewById(R.id.shuffle_btn);
@@ -111,5 +130,29 @@ public class PlayerActivity extends AppCompatActivity {
         repeat_btn = findViewById(R.id.repeat_btn);
         seek_bar = findViewById(R.id.seek_bar);
 
+    }
+
+    private void metaData(@NonNull Uri uri) {
+        MediaMetadataRetriever retriever = new MediaMetadataRetriever();
+        retriever.setDataSource(uri.toString());
+        int durationTotal = Integer.valueOf(retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION)) / 1000;
+        duration_total.setText(formattedTime(durationTotal));
+        song_name.setText(retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE));
+        song_artist.setText(retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ARTIST));
+
+        byte[] art = retriever.getEmbeddedPicture();
+        if(art != null)
+        {
+            Glide.with(this)
+                    .asBitmap()
+                    .load(art)
+                    .into(cover_art);
+        }
+        else {
+            Glide.with(this)
+                    .asBitmap()
+                    .load(R.drawable.item_img)
+                    .into(cover_art);
+        }
     }
 }

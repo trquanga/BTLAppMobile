@@ -1,33 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
-    android:padding="20dp"
     tools:context=".ItemActivity"
     android:id="@+id/music_item"
-    android:gravity="left">
-    <ImageView
-        android:src="@drawable/music"
+    android:gravity="left"
+    android:layout_margin="10dp"
+    app:cardCornerRadius="10dp">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:src="@drawable/item_img"
         android:id="@+id/album_image"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        ></ImageView>
-    <LinearLayout
-        android:layout_width="wrap_content"
+        ></de.hdodenhof.circleimageview.CircleImageView>
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="10dp"
         android:orientation="vertical"
-        android:weightSum="2"
-        android:layout_gravity="center">
+        android:layout_gravity="center"
+        android:layout_marginVertical="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@+id/album_image">
         <TextView
             android:id="@+id/music_file_name"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Tên bài hát"
+            android:textSize="15dp"
+            android:gravity="center_vertical"
+            ></TextView>
+        <TextView
+            android:id="@+id/music_artist_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/music_file_name"
+            android:text="Tên bài hát"
+            android:gravity="center_vertical"
+            android:textSize="10dp"
+            android:layout_marginTop="5dp"
             ></TextView>
 
-    </LinearLayout>
-  </LinearLayout>
+    </RelativeLayout>
+    </RelativeLayout>
+  </androidx.cardview.widget.CardView>

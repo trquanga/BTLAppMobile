@@ -1,16 +1,20 @@
 package com.example.appnghenhac;
 
+import static com.example.appnghenhac.MainActivity.listBaiHat;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.media.MediaMetadata;
 import android.media.MediaMetadataRetriever;
 import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -32,6 +36,7 @@ public class MusicApdapter extends RecyclerView.Adapter<MusicApdapter.MyVieHolde
 
         //variable for any view that will be set as you render a row
         TextView file_name;
+        TextView artist_name;
         ImageView album_art;
 
         // We also create a constructor that accepts the entire item row
@@ -39,6 +44,7 @@ public class MusicApdapter extends RecyclerView.Adapter<MusicApdapter.MyVieHolde
         public MyVieHolder(@NonNull View itemView) {
             super(itemView);
             file_name = itemView.findViewById(R.id.music_file_name);
+            artist_name = itemView.findViewById(R.id.music_artist_name);
             album_art = itemView.findViewById(R.id.album_image);
         }
     }
@@ -77,7 +83,12 @@ public class MusicApdapter extends RecyclerView.Adapter<MusicApdapter.MyVieHolde
     //onBindViewHolder to set the view attributes based on the data
     @Override
     public void onBindViewHolder(@NonNull MyVieHolder holder, @SuppressLint("RecyclerView") int position) {
-        holder.file_name.setText(mFiles.get(position).getTitle());
+        Uri uri = Uri.parse(listBaiHat.get(position).getPath());
+        MediaMetadataRetriever retriever = new MediaMetadataRetriever();
+        retriever.setDataSource(uri.toString());
+
+        holder.file_name.setText(retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE));
+        holder.artist_name.setText(retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ARTIST));
         byte[] image = new byte[0];
         try {
             image = getAlbumArt(mFiles.get(position).getPath());
@@ -91,7 +102,7 @@ public class MusicApdapter extends RecyclerView.Adapter<MusicApdapter.MyVieHolde
         }
         else {
             Glide.with(mContext)
-                    .load(R.drawable.music)
+                    .load(R.drawable.item_img)
                     .into(holder.album_art);
         }
         holder.itemView.setOnClickListener(new View.OnClickListener(){
