@@ -13,7 +13,8 @@
         android:id="@+id/top_btn"
         android:layout_height="50dp"
         android:background="@color/primaryDark"
-        android:weightSum="7">
+        android:weightSum="7"
+        android:gravity="center_horizontal">
         <ImageView
             android:layout_width="0dp"
             android:layout_weight="1"
@@ -100,12 +101,14 @@
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
         android:id="@+id/seek_bar"></SeekBar>
+
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:id="@+id/bottom_btn"
-        android:layout_height="50dp"
-        android:weightSum="5"
+        android:layout_height="wrap_content"
+        android:weightSum="4"
+        android:padding="10dp"
         android:layout_gravity="bottom"
         >
         <ImageView
@@ -124,15 +127,13 @@
             android:src="@drawable/skip_previous"
             android:layout_gravity="center_vertical">
         </ImageView>
-        <ImageView
-            android:background="@color/green"
-            android:id="@+id/play_btn"
-            android:layout_width="0dp"
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/playPause_btn"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:src="@drawable/play_arrow"
-            android:layout_gravity="center_vertical">
-        </ImageView>
+            >
+        </com.google.android.material.floatingactionbutton.FloatingActionButton>
         <ImageView
             android:layout_width="0dp"
             android:layout_weight="1"

@@ -21,7 +21,7 @@
         android:layout_weight="0.2"
         android:text="Thể loại"
         android:gravity="center_vertical"
-        android:layout_marginVertical="10dp">
+        android:layout_marginVertical="5dp">
     </TextView>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/category_recview"
@@ -36,9 +36,4 @@
         android:gravity="center_vertical"
         android:layout_marginVertical="10dp">
     </TextView>
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recent_recview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        ></androidx.recyclerview.widget.RecyclerView>
 </LinearLayout>

@@ -15,6 +15,8 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabLayout;
 
 
+import android.annotation.SuppressLint;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -32,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
     public static final int REQUEST_CODE = 1;
     static ArrayList<FileBaiHat> listBaiHat;
     static ArrayList<Category> categories;
+
+    static boolean shuffleBoolean = false, repeatBoolean = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,6 +126,7 @@ public class MainActivity extends AppCompatActivity {
     public static ArrayList<FileBaiHat> getAllAudio(Context context) {
         ArrayList<FileBaiHat> tempListBaiHat = new ArrayList<>();
         Uri uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
+
         String[] projection =  {
                 MediaStore.Audio.Media.ALBUM,
                 MediaStore.Audio.Media.TITLE,
@@ -145,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
                 String artist = cursor.getString(4);
 
                 FileBaiHat fileBaiHat = new FileBaiHat(path, title, artist, album, duration);
-                Log.e("Path: " + path, "Duration: " + duration);
+                Log.e("Path: ", path);
                 tempListBaiHat.add(fileBaiHat);
             }
             cursor.close();
